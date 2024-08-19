@@ -25,7 +25,7 @@ Vagrant.configure(2) do |config|
  end
 
  config.vm.define "client" do |client|
-  client.vm.network "public_network", ip: "192.168.0.183"
+  client.vm.network "public_network", ip: "192.168.0.182"
   client.vm.hostname = "client"
 
   client.vm.provision "shell", inline: <<-SHELL
