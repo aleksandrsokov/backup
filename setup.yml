@@ -4,8 +4,13 @@
   become: yes
 
   tasks:
-  - name: install borg
+  - name: install borgbackup
     apt:
-      name: borg
+      name: borgbackup
       state: latest
       update_cache: yes
+  
+  #- block: #===== configure server =====
+  #  - name: Create user 
+  #    
+  #  when: ansible_hostname == "server"
