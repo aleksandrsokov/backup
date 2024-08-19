@@ -1,0 +1,11 @@
+---
+- name: backup
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: install borg
+    apt:
+      name: borg
+      state: latest
+      update_cache: yes
