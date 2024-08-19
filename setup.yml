@@ -10,7 +10,25 @@
       state: latest
       update_cache: yes
   
-  #- block: #===== configure server =====
-  #  - name: Create user 
-  #    
-  #  when: ansible_hostname == "server"
+  - block: #===== configure server =====
+    - name: Create user 
+      user: 
+        name: borg
+        create_home: yes
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
+
+    - name: Create authorized_keys file
+      file:
+        path: /home/borg/.ssh/authorized_keys
+        owner: borg
+        group: borg
+        mode:
+    when: ansible_hostname == "server"
+
+  - block: #===== configure client =====
+    - name: Generate an OpenSSH keypair 
+      openssh_keypair: 
+        path: /home/vagrant/.ssh
+
+    when: ansible_hostname == "client"
