@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
 
  config.vm.define "server" do |server|
   server.vm.network "public_network", ip: "192.168.0.181"
-  server.vm.hostname = "web"
+  server.vm.hostname = "server"
 
   server.vm.provision "shell", inline: <<-SHELL
     mkdir -p ~root/.ssh
