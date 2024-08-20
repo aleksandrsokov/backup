@@ -1,6 +1,7 @@
 ---
 - name: backup
   hosts: all
+  vars_files: env/env.yml
   become: yes
 
   tasks:
@@ -15,12 +16,21 @@
       user: 
         name: borg
         create_home: yes
+        password: "{{ password | password_hash('sha512')}}"
         ssh_key_bits: 2048
         ssh_key_file: .ssh/id_rsa
 
     - name: create folder
       file:
         path: /home/borg/.ssh/
+        state: directory
+        recurse: yes
+        owner: borg
+        group: borg
+
+    - name: create backup folder
+      file:
+        path: /backup
         state: directory
         recurse: yes
         owner: borg
@@ -48,6 +58,6 @@
       apt:
         name: sshpass
         state: latest
-    #- name: ssh-copy-id
-    #  command: sshpass -p password ssh-copy-id -i /home/{{user}}/.ssh/id_rsa.pub -o StrictHostKeyChecking=no user@serverB
+    - name: ssh-copy-id
+      command: sshpass -p otus2024 ssh-copy-id -i /home/vagrant/.ssh/id_rsa.pub -o StrictHostKeyChecking=no borg@192.168.0.181
     when: ansible_hostname == "client"
