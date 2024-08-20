@@ -58,6 +58,12 @@
       apt:
         name: sshpass
         state: latest
+
     - name: ssh-copy-id
       command: sshpass -p otus2024 ssh-copy-id -i /home/vagrant/.ssh/id_rsa.pub -o StrictHostKeyChecking=no borg@192.168.0.181
+
+    - name: borg init
+      shell: borg init --encryption=repokey borg@192.168.0.181:/backup
+    
+    
     when: ansible_hostname == "client"
