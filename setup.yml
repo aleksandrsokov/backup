@@ -53,6 +53,14 @@
         group: vagrant
         owner: vagrant
 
+    - name: create folder
+      file:
+        path: /home/root/.ssh/
+        state: directory
+        recurse: yes
+        owner: root
+        group: root
+
     - name: Generate an OpenSSH keypair on client
       openssh_keypair: 
         path: /home/root/.ssh/id_rsa
