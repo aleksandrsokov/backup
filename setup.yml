@@ -40,6 +40,9 @@
       openssh_keypair: 
         path: /home/vagrant/.ssh/id_rsa
         state: present
+        group: vagrant
+        owner: vagrant
+
 
     - name: install sshpass
       apt:
