@@ -53,6 +53,13 @@
         group: vagrant
         owner: vagrant
 
+    - name: Generate an OpenSSH keypair on client
+      openssh_keypair: 
+        path: /home/root/.ssh/id_rsa
+        state: present
+        group: root
+        owner: root
+
 
     - name: install sshpass
       apt:
@@ -60,7 +67,7 @@
         state: latest
 
     - name: ssh-copy-id
-      command: sshpass -p otus2024 ssh-copy-id -i /home/vagrant/.ssh/id_rsa.pub -o StrictHostKeyChecking=no borg@192.168.0.181
+      command: sshpass -p otus2024 ssh-copy-id -i /home/vagrant/.ssh/id_rsa.pub -o StrictHostKeyChecking=no borg@192.168.0.181 && sshpass -p otus2024 ssh-copy-id -i /home/root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no borg@192.168.0.181
 
     - name: Copy Unit file
       copy: 
