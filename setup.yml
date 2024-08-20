@@ -41,4 +41,10 @@
         path: /home/vagrant/.ssh/id_rsa
         state: present
 
+    - name: install sshpass
+      apt:
+        name: sshpass
+        state: latest
+    #- name: ssh-copy-id
+    #  command: sshpass -p password ssh-copy-id -i /home/{{user}}/.ssh/id_rsa.pub -o StrictHostKeyChecking=no user@serverB
     when: ansible_hostname == "client"
