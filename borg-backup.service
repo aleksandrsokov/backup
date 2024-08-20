@@ -7,7 +7,7 @@ Type=oneshot
 # Парольная фраза
 Environment="BORG_PASSPHRASE=Otus1234"
 # Репозиторий
-Environment=REPO=borg@192.168.11.160:/var/backup/
+Environment=REPO=borg@192.168.0.181:/backup
 # Что бэкапим
 Environment=BACKUP_TARGET=/etc
 
